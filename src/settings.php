@@ -19,9 +19,10 @@ return [
         // Doctrine ORM
         'orm' => [
             'driver'   => 'pdo_mysql',
-            'user'     => 'root',
-            'password' => '',
-            'dbname'   => 'foo',
+            'user'     => 'admin',
+            'password' => 'k4olo72',
+            'dbname'   => 'slimcosmo',
+            'unix_socket'   => '/opt/local/var/run/mysql56/mysqld.sock'
         ],
     ],
 ];
