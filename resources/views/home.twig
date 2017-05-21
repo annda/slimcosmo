@@ -1,0 +1,9 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    {% if logged_in %}
+        <h1>Hello friend!</h1>
+    {% else %}
+        <h1>Hello stranger!</h1>
+    {% endif %}
+{% endblock %}

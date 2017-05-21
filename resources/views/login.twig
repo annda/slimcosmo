@@ -1,0 +1,13 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+<h1>Log in</h1>
+    {% if logged_in %}
+        <p>You are already logged in.</p>
+    {% else %}
+        <form class="" action="{{ path_for('login') }}" method="post">
+            <button type="submit" class="btn btn-success">Log in</button>
+        </form>
+    {% endif %}
+
+{% endblock %}
