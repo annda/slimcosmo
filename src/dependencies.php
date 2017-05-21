@@ -22,9 +22,32 @@ $container['logger'] = function (\Slim\Container $c) {
 $container['orm'] = function (\Slim\Container $c) {
     $dbParams = $c->get('settings')['orm'];
 
-    $paths = array(__DIR__ . '/models');
+    $paths = array(__DIR__ . '/Models');
     $isDevMode = false; // FIXME get from settings?
 
     $config = Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
     return Doctrine\ORM\EntityManager::create($dbParams, $config);
 };
+
+//twig
+$container['view'] = function ($container) {
+    $view = new \Slim\Views\Twig(__DIR__ . '/../resources/views', [
+        'cache' => false,
+        ]);
+    $view->addExtension(new \Slim\Views\TwigExtension(
+        $container->router,
+        $container->request->getUri()
+    ));
+    return $view;
+};
+
+// controllers
+$container['HomeController'] = function ($container) {
+    return new \CosmoCode\SlimSkeleton\Controllers\HomeController($container);
+};
+$container['AuthenticationController'] = function ($container) {
+    return new \CosmoCode\SlimSkeleton\Controllers\AuthenticationController($container);
+};
+
+// middleware
+$app->add(new \CosmoCode\SlimSkeleton\Middleware\AuthenticationMiddleware($container));
