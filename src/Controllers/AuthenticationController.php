@@ -7,7 +7,8 @@ class AuthenticationController extends BaseController
 
     public function login($request, $response)
     {
-        return $this->view->render($response, 'login.twig', array('logged_in' => $_SESSION["logged_in"]));
+        $login = $_SESSION["logged_in"] ?? null;
+        return $this->view->render($response, 'login.twig', array('logged_in' => $login));
     }
 
     public function in($request, $response)
@@ -18,7 +19,8 @@ class AuthenticationController extends BaseController
 
     public function logout($request, $response)
     {
-        return $this->view->render($response, 'logout.twig', array('logged_in' => $_SESSION["logged_in"]));
+        $login = $_SESSION["logged_in"] ?? null;
+        return $this->view->render($response, 'logout.twig', array('logged_in' => $login));
     }
 
     public function out($request, $response)
